@@ -282,49 +282,52 @@ class CustomAppBar2 extends PreferredSize {
   Widget build(BuildContext context) {
     return Container(
         color: kAppbarColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: InkWell(
-                onTap: () {
-                 Navigator.of(contextcome).pop();
-                },
-                child: Icon(Icons.arrow_back_ios_outlined,
-                    size: 40, color: Colors.grey),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+                  child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: InkWell(
+                  onTap: () {
+                   Navigator.of(contextcome).pop();
+                  },
+                  child: Icon(Icons.arrow_back_ios_outlined,
+                      size: 40, color: Colors.grey),
+                ),
               ),
-            ),
-            SizedBox(width: 100),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Spacer(),
-                BuildAppbarItems2(name1: name),
-              ],
-            ),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.03),
-            InkWell(
-                onTap: () {
-                  Clipboard.setData(new ClipboardData(text: data ?? "wait"));
-                  Get.snackbar(
-                    "ClipBoard",
-                    "Text Copied",
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: 30,
-                    child: Icon(
-                      Icons.copy,
-                      size: 40,
-                      color: Colors.grey,
+              SizedBox(width: 100),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Spacer(),
+                  BuildAppbarItems2(name1: name),
+                ],
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+              InkWell(
+                  onTap: () {
+                    Clipboard.setData(new ClipboardData(text: data ?? "wait"));
+                    Get.snackbar(
+                      "ClipBoard",
+                      "Text Copied",
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height: 30,
+                      child: Icon(
+                        Icons.copy,
+                        size: 40,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ));
   }
 }

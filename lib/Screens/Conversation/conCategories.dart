@@ -208,29 +208,32 @@ class CustomAppBar extends PreferredSize {
   Widget build(BuildContext context) {
     return Container(
         color: kAppbarColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                "Conversation",
-                style: TextStyle(fontSize: 28, color: Color(0xff085787)),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+                  child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  "Conversation",
+                  style: TextStyle(fontSize: 28, color: Color(0xff085787)),
+                ),
               ),
-            ),
-            Column(
-              children: [
-                Spacer(),
-                buildAppbarItems(),
-              ],
-            ),
-          ],
+              Column(
+                children: [
+                  Spacer(),
+                  BuildAppbarItems(),
+                ],
+              ),
+            ],
+          ),
         ));
   }
 }
 
-class buildAppbarItems extends StatelessWidget {
-  const buildAppbarItems({
+class BuildAppbarItems extends StatelessWidget {
+  const BuildAppbarItems({
     Key key,
   }) : super(key: key);
 

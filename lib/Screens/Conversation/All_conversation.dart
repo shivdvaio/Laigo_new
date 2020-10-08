@@ -196,7 +196,8 @@ class _AllConversationDataState extends State<AllConversationData> {
                                     ),
                                       Text(
                                         ' \n ${snapshot.data.docs[indexValue1].data()['conversationExplanation']}',
-                                        style: TextStyle(fontSize: 17),
+                                        style:  GoogleFonts.quicksand(
+                                        fontSize: 18, color: Colors.black),
                                       ),
                                     ],
                                   ),
@@ -290,7 +291,7 @@ class CustomAppBar2 extends PreferredSize {
                 BuildAppbarItems2(name1: name),
               ],
             ),
-            SizedBox(width: 100),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.03),
             InkWell(
                 onTap: () {
                   Clipboard.setData(new ClipboardData(text: data ?? "wait"));

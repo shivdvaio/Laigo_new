@@ -154,50 +154,7 @@ class _CategoryDataofConversationState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffeeeeee),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(140.0),
-        child: AppBar(
-          backgroundColor: kAppbarColor,
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back_ios_outlined,
-              size: 40,
-              color: Colors.grey,
-            ),
-          ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Clipboard.setData(new ClipboardData(text: data ?? "wait"));
-                Get.snackbar(
-                  "ClipBoard",
-                  "Text Copied",
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  height: 30,
-                  child: Icon(
-                    Icons.copy,
-                    size: 40,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-            ),
-          ],
-          title: Text("Sentence",
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Color(0xff427FA4),
-                  fontWeight: FontWeight.bold)),
-        ),
-      ),
+      appBar: CustomAppBar2(contextcome: context,name: "Sentence",dataofClipboard: data,height: 140,),
       body: Container(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
@@ -217,12 +174,19 @@ class _CategoryDataofConversationState
                         lengthOfsentences = snapshot.data.docs.length;
                         return Container(
                           margin: EdgeInsets.only(left: 60),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text(
-                              '${snapshot.data.docs[indexValue1].data()['conversationLine'].toString()}',
-                              style: GoogleFonts.quicksand(
-                                  fontSize: 20, color: Colors.white),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Text(
+                                    '${snapshot.data.docs[indexValue1].data()['conversationLine'].toString()}',
+                                    style: GoogleFonts.quicksand(
+                                        fontSize: 20, color: Colors.white),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -255,22 +219,25 @@ class _CategoryDataofConversationState
                           margin: EdgeInsets.only(right: 60),
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Usage",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17),
-                                ),
-                                Text(
-                                  '\n${snapshot.data.docs[indexValue1].data()['conversationExplanation'].toString()}',
-                                  style: GoogleFonts.quicksand(
-                                      fontSize: 18, color: Colors.black),
-                                ),
-                              ],
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Usage:",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  ),
+                                  Text(
+                                    '\n${snapshot.data.docs[indexValue1].data()['conversationExplanation'].toString()}',
+                                    style: GoogleFonts.quicksand(
+                                        fontSize: 18, color: Colors.black),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -293,16 +260,16 @@ class _CategoryDataofConversationState
                           .collection('categoryData')
                           .snapshots()),
                   SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Icon(
                         Icons.arrow_back_ios_outlined,
-                        size: 40,
+                        size: 30,
                       ),
-                      Icon(Icons.arrow_forward_ios_outlined, size: 40)
+                      Icon(Icons.arrow_forward_ios_outlined, size: 30)
                     ],
                   )
                 ]),
@@ -345,7 +312,7 @@ class CustomAppBar2 extends PreferredSize {
                     size: 40, color: Colors.grey),
               ),
             ),
-            SizedBox(width: 70),
+            SizedBox(width: 80),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -353,7 +320,7 @@ class CustomAppBar2 extends PreferredSize {
                 BuildAppbarItems2(name1: name),
               ],
             ),
-            SizedBox(width: 50),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.03),
             InkWell(
               onTap: () {
                 Clipboard.setData(new ClipboardData(text: data ?? "wait"));
@@ -404,3 +371,4 @@ class BuildAppbarItems2 extends StatelessWidget {
     );
   }
 }
+

@@ -14,19 +14,30 @@ class Conversation extends StatefulWidget {
 }
 
 int currentIndex = 0;
-
+int selectedIndex = 0;
+int indexForConversationColor;
+int indexforOpenersColor;
+int selectedIndex2 = 0;
 class _ConversationState extends State<Conversation> {
   PageController _pageController = PageController(initialPage: 0);
 
-  int _selectedIndex = 0;
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() {});
 
     if (index == 0) {
       Navigator.of(context).pop();
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      selectedIndex = 0;
+      indexForConversationColor = 1;
+      indexforOpenersColor = 1;
+    });
   }
 
   @override
@@ -62,9 +73,10 @@ class _ConversationState extends State<Conversation> {
                     label: 'IN CONVERSATION',
                   ),
                 ],
-                currentIndex: _selectedIndex,
-                unselectedItemColor: Colors.black,
-                selectedItemColor: Colors.blue,
+                currentIndex: selectedIndex,
+                unselectedItemColor:
+                    indexForConversationColor == 1 ? Colors.blue : Colors.black,
+                selectedItemColor:indexforOpenersColor == 1 ? Colors.black : Colors.blue,
                 onTap: _onItemTapped,
                 unselectedFontSize: 20,
                 selectedFontSize: 20,
@@ -78,7 +90,7 @@ class _ConversationState extends State<Conversation> {
             child: PageView(
                 onPageChanged: (index) {
                   setState(() {
-                    currentIndex = index;
+                    selectedIndex2 = index;
                   });
                 },
                 scrollDirection: Axis.horizontal,
@@ -236,7 +248,7 @@ class buildAppbarItems extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                     decoration: BoxDecoration(
-                        color: currentIndex == 0
+                        color: selectedIndex2 == 0
                             ? Colors.grey.withOpacity(0.3)
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(10)),
@@ -245,7 +257,7 @@ class buildAppbarItems extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       child: Text(
                         "All",
-                        style: ktextStyle,
+                        style: TextStyle(color: selectedIndex2 ==0  ? Color(0xff085787) : Colors.grey,fontSize: 25),
                       ),
                     )),
               ),
@@ -253,7 +265,7 @@ class buildAppbarItems extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                     decoration: BoxDecoration(
-                        color: currentIndex == 1
+                        color: selectedIndex2 == 1
                             ? Colors.grey.withOpacity(0.3)
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(10)),
@@ -261,7 +273,7 @@ class buildAppbarItems extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Categories",
-                        style: ktextStyle,
+                        style: TextStyle(color:  selectedIndex2 ==1  ? Color(0xff085787) : Colors.grey,fontSize: 25),
                       ),
                     )),
               ),

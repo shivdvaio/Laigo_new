@@ -65,6 +65,7 @@ class _AllState extends State<All> {
                       
                     });
               }),
+                         
         ],
       ),
     );
@@ -192,27 +193,25 @@ class _MessagesState extends State<Messages> {
                               margin: EdgeInsets.only(right: 60),
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                  children: [
-                                    Column(
-                                      
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                      "Usage",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17),
-                                    ),
-                                        Text(
-                                          '\n${snapshot.data.docs[indexValue1].data()['openersExplanation']}',
-                                          style: GoogleFonts.quicksand(
-                                              fontSize: 18, color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                child: SingleChildScrollView(
+                                                                      child: Column(
+                                  
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                    "Usage:",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  ),
+                                      Text(
+                                        '\n${snapshot.data.docs[indexValue1].data()['openersExplanation']}',
+                                        style: GoogleFonts.quicksand(
+                                            fontSize: 18, color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               decoration: BoxDecoration(
@@ -304,7 +303,7 @@ class CustomAppBar2 extends PreferredSize {
                 BuildAppbarItems2(name1: name),
               ],
             ),
-            SizedBox(width: 100),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.03),
             InkWell(
                 onTap: () {
                   Clipboard.setData(new ClipboardData(text: data ?? "wait"));

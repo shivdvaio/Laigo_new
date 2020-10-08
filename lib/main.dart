@@ -27,20 +27,25 @@ class Laigo extends StatefulWidget {
   @override
   _LaigoState createState() => _LaigoState();
 }
-
+int indexColorforOpeners;
 class _LaigoState extends State<Laigo> {
   PageController _pageController = PageController(initialPage: 0);
 
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    
 
     if (index == 1) {
       Get.to(Conversation());
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    indexColorforOpeners = 1;
   }
 
   @override
@@ -89,7 +94,7 @@ class _LaigoState extends State<Laigo> {
                   ],
                   currentIndex: _selectedIndex,
                   unselectedItemColor: Colors.black,
-                  selectedItemColor: Colors.blue,
+                  selectedItemColor: indexColorforOpeners == 1 ? Colors.blue : Colors.black,
                   onTap: _onItemTapped,
                   unselectedFontSize: 20,
                   selectedFontSize: 20,
@@ -181,7 +186,7 @@ class buildAppbarItems extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       child: Text(
                         "All",
-                        style: ktextStyle,
+                        style:  TextStyle(color: currentIndex==0  ? Color(0xff085787) : Colors.grey,fontSize: 25),
                       ),
                     )),
               ),
@@ -197,7 +202,7 @@ class buildAppbarItems extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Categories",
-                        style: ktextStyle,
+                        style: TextStyle(color: currentIndex==1  ? Color(0xff085787) : Colors.grey,fontSize: 25),
                       ),
                     )),
               ),

@@ -3,9 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:laigo/data/constant.dart';
-import 'package:laigo/main.dart';
 
 class CategoryOptionsData extends StatefulWidget {
   final nameOfCategory;
@@ -97,10 +95,6 @@ class _CategoryOptionsDataState extends State<CategoryOptionsData> {
   }
 }
 
-
-
-
-
 class CategoryOptionsdata extends StatefulWidget {
   final String name;
   final int index;
@@ -159,7 +153,12 @@ class _CategoryOptionsdataState extends State<CategoryOptionsdata> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xffeeeeee),
-        appBar: CustomAppBar2(name: "Sentence",height: 120,contextcome: context,dataofClipboard: data,),
+        appBar: CustomAppBar2(
+          name: "Sentence",
+          height: 120,
+          contextcome: context,
+          dataofClipboard: data,
+        ),
         body: Container(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
@@ -219,27 +218,28 @@ class _CategoryOptionsdataState extends State<CategoryOptionsdata> {
                           return Container(
                             margin: EdgeInsets.only(right: 60),
                             child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Usage",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17),
-                                    ),
-                                    Text(
-                                        ' \n${snapshot.data.docs[indexValue1].data()['openersExplanation'].toString()}',
-                                        style: GoogleFonts.quicksand(
-                                            fontSize: 18, color: Colors.black)),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                padding: const EdgeInsets.all(20.0),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Usage:",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17),
+                                      ),
+                                      Text(
+                                          ' \n${snapshot.data.docs[indexValue1].data()['openersExplanation'].toString()}',
+                                          style: GoogleFonts.quicksand(
+                                              fontSize: 18,
+                                              color: Colors.black)),
+                                    ],
+                                  ),
+                                )),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20)),
@@ -291,8 +291,6 @@ class _CategoryOptionsdataState extends State<CategoryOptionsdata> {
   }
 }
 
-
-
 // ignore: must_be_immutable
 class CustomAppBar2 extends PreferredSize {
   final double height;
@@ -300,7 +298,11 @@ class CustomAppBar2 extends PreferredSize {
   BuildContext contextcome;
   final dataofClipboard;
 
-  CustomAppBar2({this.height = kToolbarHeight, this.name,this.contextcome,this.dataofClipboard});
+  CustomAppBar2(
+      {this.height = kToolbarHeight,
+      this.name,
+      this.contextcome,
+      this.dataofClipboard});
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -316,7 +318,7 @@ class CustomAppBar2 extends PreferredSize {
               padding: const EdgeInsets.all(15.0),
               child: InkWell(
                 onTap: () {
-                 Navigator.of(contextcome).pop();
+                  Navigator.of(contextcome).pop();
                 },
                 child: Icon(Icons.arrow_back_ios_outlined,
                     size: 40, color: Colors.grey),
@@ -330,34 +332,34 @@ class CustomAppBar2 extends PreferredSize {
                 BuildAppbarItems2(name1: name),
               ],
             ),
-            SizedBox(width: 100),
+           SizedBox(width: MediaQuery.of(context).size.width * 0.03),
             InkWell(
-                onTap: () {
-                  Clipboard.setData(new ClipboardData(text: data ?? "wait"));
-                  Get.snackbar(
-                    "ClipBoard",
-                    "Text Copied",
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                    height: 30,
-                    child: Icon(
-                      Icons.copy,
-                      size: 40,
-                      color: Colors.grey,
-                    ),
+              onTap: () {
+                Clipboard.setData(new ClipboardData(text: data ?? "wait"));
+                Get.snackbar(
+                  "ClipBoard",
+                  "Text Copied",
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  height: 30,
+                  child: Icon(
+                    Icons.copy,
+                    size: 40,
+                    color: Colors.grey,
                   ),
                 ),
               ),
+            ),
           ],
         ));
   }
 }
 
 class BuildAppbarItems2 extends StatelessWidget {
-   BuildAppbarItems2({Key key, this.name1}) : super(key: key);
+  BuildAppbarItems2({Key key, this.name1}) : super(key: key);
   final name1;
 
   @override
@@ -382,17 +384,12 @@ class BuildAppbarItems2 extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 class CustomAppBar extends PreferredSize {
   final double height;
   String name;
   BuildContext contextcome;
 
-  CustomAppBar({this.height = kToolbarHeight, this.name,this.contextcome});
+  CustomAppBar({this.height = kToolbarHeight, this.name, this.contextcome});
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -408,7 +405,7 @@ class CustomAppBar extends PreferredSize {
               padding: const EdgeInsets.all(15.0),
               child: InkWell(
                 onTap: () {
-                 Navigator.of(contextcome).pop();
+                  Navigator.of(contextcome).pop();
                 },
                 child: Icon(Icons.arrow_back_ios_outlined,
                     size: 40, color: Colors.grey),
@@ -428,7 +425,7 @@ class CustomAppBar extends PreferredSize {
 }
 
 class BuildAppbarItems extends StatelessWidget {
-   BuildAppbarItems({Key key, this.name1}) : super(key: key);
+  BuildAppbarItems({Key key, this.name1}) : super(key: key);
   final name1;
 
   @override
@@ -452,4 +449,3 @@ class BuildAppbarItems extends StatelessWidget {
     );
   }
 }
-
